@@ -34,9 +34,11 @@ public class Draw extends AnimationTimer {
         updateEntities(uiObject, elapsedTime);
         renderEntities(uiObject, elapsedTime);
         
+        gc.save();
+        gc.translate(ga.getX(), ga.getY()); //Seta novo ponto 0,0 no canto da gameArea
         updateEntities(entityObject, elapsedTime);
         renderEntities(entityObject, elapsedTime);
-        
+        gc.restore();
         frameCount++;
     }
     

@@ -15,18 +15,20 @@ import static oopacman.Key.*;
  */
 public class Pacman extends Actor {
     
-    private int speed = 10, size = 30;
+    private int speed = 10;
+    
     
     public Pacman(int x, int y) {
         super(x, y, "Pacman");
+        setSize(30);
     }
 
     @Override
     public void render(GraphicsContext gc, double time) {
         gc.setFill(new Color(1.00, 1.00, 0.50, 1.0));
         gc.setStroke(new Color(0,0,0,1));
-        gc.fillOval(getX(), getY(), size, size);
-        gc.strokeOval(getX(), getY(), size, size);
+        gc.fillOval(getX(), getY(), getSize(), getSize());
+        gc.strokeOval(getX(), getY(), getSize(), getSize());
     }
 
     @Override

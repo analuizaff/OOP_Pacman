@@ -13,8 +13,10 @@ import static oopacman.OOPacman.*;
  */
 public abstract class Entity implements EntityObject {
 
-    private int x, y;
+    private int x, y, size;
     private String tipo;
+    private final int maxX = (int) Math.round(ga.getWidth());
+    private final int maxY = (int) Math.round(ga.getHeight());
 
     public Entity(int x, int y, String tipo) {
         this.x = x;
@@ -27,7 +29,7 @@ public abstract class Entity implements EntityObject {
     }
 
     public void setX(int x) {
-        this.x = constrain(x,0,width);
+        this.x = constrain(x,0, maxX-getSize());
     }
 
     public int getY() {
@@ -35,7 +37,15 @@ public abstract class Entity implements EntityObject {
     }
 
     public void setY(int y) {
-        this.y = constrain(y,0,height-10);
+        this.y = constrain(y,0, maxY-getSize());
+    }
+    
+    public int getSize() {
+        return this.size;
+    }
+    
+    public void setSize(int size) {
+        this.size = size;
     }
 
     public String getTipo() {
