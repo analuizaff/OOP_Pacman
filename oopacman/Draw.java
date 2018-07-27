@@ -31,8 +31,8 @@ public class Draw extends AnimationTimer {
         gc.fill();
         gc.fillRect(0, 0, width, height);
         
-        updateEntities(entityObject, elapsedTime);
-        renderEntities(entityObject, elapsedTime);
+        updateEntities(uiObject, elapsedTime);
+        renderEntities(uiObject, elapsedTime);
         
         updateEntities(entityObject, elapsedTime);
         renderEntities(entityObject, elapsedTime);

@@ -23,7 +23,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     static int height = 600;
     public static int boss = 2;
 
-    static GameArea ga; //Area de jogo
+    static GameArea ga = new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03); //Area de jogo
     
     //Entidades que possuem metodos render() e update();
     static ArrayList<GameObject> uiObject; //Desenhados no geral
@@ -63,7 +63,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     }
 
     private void setupObjects() {
-        uiObject.add(new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03)); //3:4, 10%, 3%
+        uiObject.add(ga); //3:4, 10%, 3%
         entityObject.add(new Pacman(width / 2, height / 2)); //Teste
     }
 
