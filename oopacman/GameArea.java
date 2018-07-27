@@ -12,7 +12,7 @@ import javafx.scene.paint.Color;
  *
  * @author Alexylva
  */
-public class GameArea implements GameObject {
+public class GameArea implements UIObject {
     private final double width, height, x, y;
     
     public GameArea(double width, double height, double x, double y) {

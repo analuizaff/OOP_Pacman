@@ -5,6 +5,7 @@
  */
 package oopacman;
 
+import java.util.ArrayList;
 import javafx.animation.AnimationTimer;
 import javafx.scene.paint.Color;
 import static oopacman.OOPacman.*;
@@ -30,9 +31,34 @@ public class Draw extends AnimationTimer {
         gc.fill();
         gc.fillRect(0, 0, width, height);
         
-        updateEntities(gameObjects, elapsedTime);
-        renderEntities(gameObjects, elapsedTime);
+        updateEntities(entityObject, elapsedTime);
+        renderEntities(entityObject, elapsedTime);
+        
+        updateEntities(entityObject, elapsedTime);
+        renderEntities(entityObject, elapsedTime);
         
         frameCount++;
+    }
+    
+    public void updateEntities(ArrayList<GameObject> gameobjects, double time) {
+        for (GameObject gob : gameobjects) {
+            if (gob != null) {
+                gob.update(gc, time);
+            }
+        }
+    }
+
+    /**
+     * Realiza a logica de renderização de cada entidade
+     *
+     * @param gameobjects Array de entidades
+     * @param time Tempo atual
+     */
+    public void renderEntities(ArrayList<GameObject> gameobjects, double time) {
+        for (GameObject gob : gameobjects) {
+            if (gob != null) {
+                gob.render(gc, time);
+            }
+        }
     }
 }

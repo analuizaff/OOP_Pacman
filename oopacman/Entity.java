@@ -11,7 +11,7 @@ import static oopacman.OOPacman.*;
  *
  * @author Alexylva
  */
-public abstract class Entity implements GameObject {
+public abstract class Entity implements EntityObject {
 
     private int x, y;
     private String tipo;

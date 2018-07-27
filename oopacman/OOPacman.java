@@ -14,17 +14,23 @@ import javafx.stage.Stage;
  *
  * @author Alexylva
  */
+
 public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
     static Scene pacmanScene;
     static GraphicsContext gc;
     static int width = 800;
     static int height = 600;
+    public static int boss = 2;
 
     static GameArea ga; //Area de jogo
-
-    static ArrayList<GameObject> gameObjects; //Entidades que possuem metodos render() e update();
-    static ArrayList<String> input;
+    
+    //Entidades que possuem metodos render() e update();
+    static ArrayList<GameObject> uiObject; //Desenhados no geral
+    static ArrayList<GameObject> entityObject; //Desenhados em GameArea
+    
+    
+    static ArrayList<String> input; //Lista de teclas pressionadas
 
     @Override
     public void start(Stage stage) {
@@ -46,7 +52,8 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         pacmanScene.setOnKeyPressed(new keyPressed());
         pacmanScene.setOnKeyReleased(new keyReleased());
 
-        gameObjects = new ArrayList<>();
+        entityObject = new ArrayList<>();
+        uiObject = new ArrayList<>();
         setupObjects(); //Adiciona os objetos a Array gameObjects;
 
         LongValue lastNanoTime = new LongValue(System.nanoTime()); //Obtem o tempo atual, classe LongValue apenas para evitar erro de contexto estatico
@@ -56,8 +63,8 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     }
 
     private void setupObjects() {
-        gameObjects.add(new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03)); //3:4, 10%, 3%
-        gameObjects.add(new Pacman(width / 2, height / 2)); //Teste
+        uiObject.add(new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03)); //3:4, 10%, 3%
+        entityObject.add(new Pacman(width / 2, height / 2)); //Teste
     }
 
     /**
@@ -66,31 +73,8 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
      * @param gameobjects Array de entidades
      * @param time Tempo atual
      */
-    public static void updateEntities(ArrayList<GameObject> gameobjects, double time) {
-        for (GameObject gob : gameobjects) {
-            if (gob != null) {
-                gob.update(gc, time);
-            }
-        }
-    }
 
-    /**
-     * Realiza a logica de renderização de cada entidade
-     *
-     * @param gameobjects Array de entidades
-     * @param time Tempo atual
-     */
-    public static void renderEntities(ArrayList<GameObject> gameobjects, double time) {
-        for (GameObject gob : gameobjects) {
-            if (gob != null) {
-                gob.render(gc, time);
-            }
-        }
-    }
-
-    public static boolean isPressed(Key key) {
-        return input.contains(key.toString());
-    }
+    
 
     private static class keyPressed implements EventHandler<KeyEvent> {
 
