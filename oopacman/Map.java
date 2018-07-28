@@ -6,7 +6,7 @@
 package oopacman;
 
 import javafx.scene.canvas.GraphicsContext;
-import static java.lang.Math.floor;
+import static java.lang.Math.*;
 
 /**
  *
@@ -22,6 +22,9 @@ public class Map implements EntityObject{
     public Map(Boolean[][] grid) {
         map = new Wall[20][15];
     }
+    
+    public int[] snapToGrid(int x, int y) {
+        return new int[] {(int) gridWidth*floor(x/gridWidth), (int) gridHeight*floor(y/gridHeight))};
     
     public int[] xyToGrid(int x, int y) {
         return new int[] {(int) floor(x*gridWidth/width), (int) floor(y*gridHeight/height)};
