@@ -24,11 +24,11 @@ public class Map implements EntityObject{
     }
     
     public int[] xyToGrid(int x, int y) {
-        return new int[] {(int) Math.floor(x/gridWidth), (int) Math.floor(y/gridHeight)};
+        return new int[] {(int) floor(x*gridWidth/width), (int) floor(y*gridHeight/height)};
     }
     
     public int[] gridToXY(int gridX, int gridY) {
-        return new int[] {(int) Math.floor(20/gridWidth), (int) Math.floor(y/gridHeight)};
+        return new int[] {(int) floor(width*gridX/gridWidth), (int) floor(height*gridY/gridHeight)};
     }
     
     @Override
