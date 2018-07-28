@@ -17,6 +17,7 @@ public abstract class Entity implements EntityObject {
     private String tipo;
     private final int maxX = (int) Math.round(ga.getWidth());
     private final int maxY = (int) Math.round(ga.getHeight());
+    
 
     public Entity(int x, int y, String tipo) {
         this.x = x;
