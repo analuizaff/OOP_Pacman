@@ -1,8 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package oopacman;
 
 import javafx.scene.canvas.GraphicsContext;
@@ -24,8 +19,9 @@ public class Map implements EntityObject{
     }
     
     public int[] snapToGrid(int x, int y) {
-        return new int[] {(int) gridWidth*floor(x/gridWidth), (int) gridHeight*floor(y/gridHeight))};
-    }
+        return new int[] {(int) gridWidth*((int) floor(x/gridWidth)), gridHeight*((int) floor(y/gridHeight))};   
+    };
+    
     
     public int[] xyToGrid(int x, int y) {
         return new int[] {(int) floor(x*gridWidth/width), (int) floor(y*gridHeight/height)};
