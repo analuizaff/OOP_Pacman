@@ -38,7 +38,7 @@ public class Map implements EntityObject{
     @Override
     public void render(GraphicsContext gc, double time) {
         for(int i = 0, j = 0; i < 20 && j < 15; i++, j++) {
-            gc.fillRect(map[i][j].getX(), map[i][j].getY(), map[i][j].getSize(), map[i][j].getSize());
+            gc.fillRect(map[i][j].getX(), map[i][j].getY(), map[i][j].getSize(), map[i][j].getSize()); //Substituir pelo render de cada Entity
         }
     }
 
