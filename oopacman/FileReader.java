@@ -24,8 +24,8 @@ public class FileReader {
 
         int[][] matrizFinal = new int[linhas][colunas];
 
-        List<String> linhas = Files.readAllLines(path);
-        String[] matrizLinha = linhas.toArray(new String[0]); //new String[0] serve pra ele retornar a matriz no tipo certo
+        List<String> lines = Files.readAllLines(path);
+        String[] matrizLinha = lines.toArray(new String[0]); //new String[0] serve pra ele retornar a matriz no tipo certo
 
         for (int i = 0; i < this.linhas; i++) {
             char[] matrizChar = matrizLinha[i].toCharArray();
