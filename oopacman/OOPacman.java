@@ -70,7 +70,6 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     private void setupObjects() {
         uiObject.add(ga);
         entityObject.add(new Map("maps/map1.txt"));
-        entityObject.add(new Pacman(width / 2, height / 2)); //Teste
     }
 
     private static class keyPressed implements EventHandler<KeyEvent> {
