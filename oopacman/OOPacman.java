@@ -23,11 +23,13 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     static int height = 600;
 
     static GameArea ga = new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03); //Area de jogo (sorry for the magic numbers) 3:4 aspect, x:10%, y:3%
+    static Map map = new Map("maps/map2.txt");
     
     //Entidades que possuem metodos render() e update();
     static ArrayList<GameObject> uiObject; //Desenhados no geral
     static ArrayList<GameObject> entityObject; //Desenhados em GameArea
     static ArrayList<GameObject> mapObject;
+    
     
     
     static ArrayList<String> input; //Lista de teclas pressionadas
@@ -71,7 +73,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
     private void setupObjects() {
         uiObject.add(ga);
-        mapObject.add(new Map("maps/map1.txt"));
+        mapObject.add(map);
     }
 
     private static class keyPressed implements EventHandler<KeyEvent> {

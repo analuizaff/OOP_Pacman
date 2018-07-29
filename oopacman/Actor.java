@@ -7,6 +7,7 @@ package oopacman;
 
 import static oopacman.Actor.Status.*;
 import static oopacman.Key.*;
+import static oopacman.OOPacman.map;
 
 /**
  *
@@ -77,13 +78,26 @@ abstract class Actor extends Entity {
     */
     
     public void mover() {
-        mover(direction, 1);
+        if(getStatus() == MOVING){
+            mover(direction, 1);
+        } else if (getStatus() == BUFFERED) {
+            if (map.dirIsFree(buffer));
+        }
+        
         return;
     }
     
     
     public boolean intercepta(Entity entity) {
         return false; //TODO
+    }
+    
+    public int getGridX() {
+        return map.snapToGrid(getX(),getY())[0];
+    }
+    
+    public int getGridY() {
+        return map.snapToGrid(getX(),getY())[1];
     }
     
     public int getCurrentX() {

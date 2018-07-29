@@ -84,6 +84,8 @@ public class Map implements UIObject {
     public int[] gridToXY(int gridX, int gridY) {
         return new int[]{(int) floor(width * gridX / gridColumns), (int) floor(height * gridY / gridLines)};
     }
+    
+    public 
 
     @Override
     public void render(GraphicsContext gc, double time) {
