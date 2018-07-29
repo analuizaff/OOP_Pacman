@@ -13,14 +13,12 @@ import static oopacman.Key.*;
  *
  * @author Alexylva
  */
-public class Pacman extends Actor {
-    
-    private int speed = 10;
-    
+public class Pacman extends Actor { 
     
     public Pacman(int x, int y) {
         super(x, y, "Pacman");
-        setSize(30);
+        setSize((int) Math.floor(OOPacman.ga.getWidth()*0.05)); //20:15
+        setSpeed(10);
     }
 
     @Override
@@ -34,14 +32,15 @@ public class Pacman extends Actor {
     @Override
     public void update(GraphicsContext gc, double time) {
         if (isPressed(UP)) {
-            mover(UP, speed);
+            direcionar(UP, getSpeed());
         } else if (isPressed(DOWN)) {
-            mover(DOWN, speed);
+            direcionar(DOWN, getSpeed());
         } else if (isPressed(LEFT)) {
-            mover(LEFT, speed);
+            direcionar(LEFT, getSpeed());
         } else if (isPressed(RIGHT)) {
-            mover(RIGHT, speed);
+            direcionar(RIGHT, getSpeed());
         }
+        mover();
     }
 
 }
