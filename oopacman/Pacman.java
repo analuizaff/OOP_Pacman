@@ -25,7 +25,7 @@ public class Pacman extends Actor {
 
     @Override
     public void mover(Key dir, int step) {
-        if (false && !map.dirIsFree(getGridX(), getGridY(), dir)) {
+        if (!map.dirIsFree(getGridX(), getGridY(), dir)) {
             setStatus(IDLE);
             return;
         }

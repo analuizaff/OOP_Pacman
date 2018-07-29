@@ -15,14 +15,6 @@ import static oopacman.OOPacman.map;
  */
 abstract class Actor extends Entity {
 
-    public Key getDirection() {
-        return direction;
-    }
-
-    public void setDirection(Key direction) {
-        this.direction = direction;
-    }
-
     enum Status {IDLE, MOVING, BUFFERED, SPECIAL};
     
     private int currentX, currentY, targetX, targetY, scale, speed;
@@ -38,7 +30,7 @@ abstract class Actor extends Entity {
     
     
     public void direcionar(Key dir, int step) {
-        if (getStatus() == MOVING) { setBuffer(dir); return; }
+        if (getStatus() == MOVING || getStatus()== IDLE) { setBuffer(dir); return; }
         setStatus(MOVING);
     }
     
@@ -139,6 +131,15 @@ abstract class Actor extends Entity {
 
     public void setSpeed(int speed) {
         this.speed = speed;
+    }
+    
+    public Key getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Key direction) {
+        this.direction = direction;
+        setBuffer(null);
     }
 
 }

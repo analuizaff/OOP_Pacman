@@ -89,22 +89,24 @@ public class Map implements UIObject {
         try {
         switch (dir) {
             case UP:
-                if (map[x][y-1].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x][y-1] instanceof Wall) {
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y,dir);
+                    (Wall map[x][y-1]).setColor();
                     return false;
                 };
                 break;
             case DOWN:
-                if (map[x][y+1].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x][y+1] instanceof Wall) {
                     return false;
                 };
                 break;
             case LEFT:
-                if (map[x-1][y].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x-1][y] instanceof Wall) {
                     return false;
                 };
                 break;
             case RIGHT:
-                if (map[x+1][y].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x+1][y] instanceof Wall) {
                     return false;
                 };
                 break;
