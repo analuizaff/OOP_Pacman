@@ -2,22 +2,51 @@ package oopacman;
 
 import javafx.scene.canvas.GraphicsContext;
 import static java.lang.Math.*;
-
+import java.io.*;
+import java.util.Scanner;
 /**
  *
  * @author Alexylva
  */
 public class Map implements EntityObject{
     private StaticEntity[][] map;
-    private int gridWidth = 20, gridHeight = 15; //4:3
+    private static final int gridWidth = 20, gridHeight = 15; //4:3
     //Real width, height
     private int width = (int) floor(OOPacman.ga.getWidth()) ,
             height = (int) floor(OOPacman.ga.getHeight());
     
-    public Map(Boolean[][] grid) {
-        map = new Wall[20][15];
+    public Map(String pathToMapFile) {
+        map = new StaticEntity[gridWidth][gridHeight];
+        int[][] mapInt = this.readMap( pathToMapFile );
+        this.criarMapa( mapInt );
+
     }
-    
+
+    private void criarMapa( int[][] mapaInt ){
+        for (int i = 0; i < gridWidth ; i++){
+            for ( int j = 0; j < gridHeight; j++ ){
+                if (mapaInt[i][j] == 1){
+                    this.map[i][j] = new Wall(i,j);
+                }else if (mapaInt[i][j] == 0){
+                    this.map[i][j] = new Path(i,j);
+                }
+            }
+        }
+    }
+
+    private int[][] readMap(String pathToFile){
+        try {
+
+            FileReader leitor = new FileReader(gridWidth, gridHeight);
+            int matrizMapaInt[][] = leitor.readFile(pathToFile);
+            return matrizMapaInt;
+
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+        return null;
+    }
+
     public int[] snapToGrid(int x, int y) {
         return new int[] {(int) gridWidth*((int) floor(x/gridWidth)), gridHeight*((int) floor(y/gridHeight))};   
     };

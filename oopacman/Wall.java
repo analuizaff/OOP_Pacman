@@ -15,7 +15,7 @@ import javafx.scene.paint.Color;
 public class Wall extends StaticEntity {
     
     public Wall(int x, int y) {
-        super(x, y);
+        super(x, y, "Wall");
         setSize((int) Math.floor(OOPacman.ga.getWidth()/15));
     }
 

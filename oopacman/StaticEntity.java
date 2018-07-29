@@ -11,10 +11,12 @@ package oopacman;
  */
 public abstract class StaticEntity implements EntityObject {
     private int x, y, size;
+    private String tipo;
     
-    public StaticEntity(int x, int y) {
+    public StaticEntity(int x, int y, String tipo) {
         this.x = x;
         this.y = y;
+        this.tipo = tipo;
     }
     
     public void setSize(int size) {
@@ -31,5 +33,9 @@ public abstract class StaticEntity implements EntityObject {
 
     public int getY() {
         return y;
+    }
+
+    public String getTipo() {
+        return tipo;
     }
 }
