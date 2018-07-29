@@ -85,7 +85,7 @@ public class Map implements UIObject {
         return new int[]{(int) floor(width * gridX / gridColumns), (int) floor(height * gridY / gridLines)};
     }
     
-    public 
+    //public 
 
     @Override
     public void render(GraphicsContext gc, double time) {
