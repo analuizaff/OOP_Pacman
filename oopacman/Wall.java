@@ -13,7 +13,15 @@ import javafx.scene.paint.Color;
  * @author Alexylva
  */
 public class Wall extends StaticEntity {
-    Color color = new Color(1.00, 1.00, 0.50, 1.0);
+
+    public Color getColor() {
+        return color;
+    }
+
+    public void setColor(Color color) {
+        this.color = color;
+    }
+    private Color color = new Color(1.00, 1.00, 0.50, 1.0);
     public Wall(int x, int y) {
         super(x, y, "Wall");
         setSize((int) Math.floor(OOPacman.ga.getWidth()/15));
@@ -21,7 +29,7 @@ public class Wall extends StaticEntity {
 
     @Override
     public void render(GraphicsContext gc, double time) {
-        gc.setFill(color);
+        gc.setFill(getColor());
         gc.setStroke(new Color(0,0,0,1));
         gc.fillRect(getX(), getY(), getSize(), getSize());
         gc.strokeRect(getX(), getY(), getSize(), getSize());

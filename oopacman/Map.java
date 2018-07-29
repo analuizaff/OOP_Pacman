@@ -91,7 +91,7 @@ public class Map implements UIObject {
             case UP:
                 if (map[x][y-1] instanceof Wall) {
                     System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y,dir);
-                    (Wall map[x][y-1]).setColor();
+                    ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
                     return false;
                 };
                 break;
