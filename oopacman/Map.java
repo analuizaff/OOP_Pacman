@@ -70,18 +70,15 @@ public class Map implements UIObject {
     }
 
     public int[] snapToGrid(int x, int y) {
-        return new int[]{(int) gridColumns * ((int) round(x / gridColumns)), gridLines * ((int) round(y / gridLines))};
-    }
-
-    ;
-    
+        return new int[]{(int) gridColumns * ((int) floor(x / gridColumns)), gridLines * ((int) floor(y / gridLines))};
+    }    
     
     public int[] xyToGrid(int x, int y) {
-        return new int[]{(int) round(x * gridLines / width), (int) round(y * gridColumns / height)};
+        return new int[]{(int) floor(x * gridLines / width), (int) floor(y * gridColumns / height)};
     }
 
     public int[] gridToXY(int gridX, int gridY) {
-        return new int[]{(int) round(width * gridX / gridColumns), (int) round(height * gridY / gridLines)};
+        return new int[]{(int) floor(width * gridX / gridColumns), (int) floor(height * gridY / gridLines)};
     }
 
     public boolean dirIsFree(int x, int y, Key dir) {
@@ -92,26 +89,26 @@ public class Map implements UIObject {
         try {
         switch (dir) {
             case UP:
-                if (map[x - 1][y].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x][y-1].getClass().getName().equals("oopacman.Wall")) {
                     return false;
                 };
                 break;
             case DOWN:
-                if (map[x + 1][y].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x][y+1].getClass().getName().equals("oopacman.Wall")) {
                     return false;
                 };
                 break;
             case LEFT:
-                if (map[x][y + 1].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x-1][y].getClass().getName().equals("oopacman.Wall")) {
                     return false;
                 };
                 break;
             case RIGHT:
-                if (map[x][y - 1].getClass().getName().equals("oopacman.Wall")) {
+                if (map[x+1][y].getClass().getName().equals("oopacman.Wall")) {
                     return false;
                 };
                 break;
-        }
+            }
         } catch (Exception e) {
             return false;
         }

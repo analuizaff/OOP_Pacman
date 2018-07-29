@@ -22,6 +22,11 @@ public class Ghost extends Actor {
         setSpeed(10);
         setCor(cor);
     }
+    
+    @Override
+    public void mover(Key dir, int step) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 
     @Override
     public void render(GraphicsContext gc, double time) {

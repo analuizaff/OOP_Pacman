@@ -34,46 +34,13 @@ abstract class Actor extends Entity {
         super(x, y, tipo);
     }
     
-    public void mover(Key dir, int step) {
-        if(!map.dirIsFree(getGridX(),getGridY(),dir)) {
-            setStatus(IDLE);
-            return;
-        }
-        switch (dir) {
-            case UP:
-                setY(getY() - step);
-                break;
-            case DOWN:
-                setY(getY() + step);
-                break;
-            case RIGHT:
-                setX(getX() + step);
-                break;
-            case LEFT:
-                setX(getX() - step);
-                break;
-        }
-    }
+    public abstract void mover(Key dir, int step);
     
     
     public void direcionar(Key dir, int step) {
         if (getStatus() == MOVING) { setBuffer(dir); return; }
         setStatus(MOVING);
     }
-    
-    /*
-    public void mover() {
-        if (getStatus() == MOVING) {
-            if (getX() != getTargetX() || getY() != getTargetY()) {
-                mover(currDir, 1);
-            } else {
-                setStatus(IDLE);
-            }
-        } else if (getStatus() == IDLE) {
-            mover();
-        }
-    }
-    */
     
     public void mover() {
         if(null != getStatus())switch (getStatus()) {
@@ -128,7 +95,7 @@ abstract class Actor extends Entity {
     }
 
     public void setBuffer(Key buffer) {
-        if(direction != buffer) {
+        if(getDirection() != buffer) {
             this.buffer = buffer;
             setStatus(BUFFERED);
         }
