@@ -41,7 +41,7 @@ public class GameArea implements UIObject {
 
     @Override
     public void render(GraphicsContext gc, double time) {
-        gc.setFill(new Color(0.1, 0.1, 0.6, 1.0));
+        gc.setFill(new Color(0.0, 0.0, 0.0, 1.0));
         gc.fillRect(getX(), getY(), getWidth(), getHeight());
     }
 

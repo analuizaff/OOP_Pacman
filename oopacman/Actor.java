@@ -6,6 +6,7 @@
 package oopacman;
 
 import static oopacman.Actor.Status.*;
+import static oopacman.Key.*;
 
 /**
  *
@@ -13,11 +14,12 @@ import static oopacman.Actor.Status.*;
  */
 abstract class Actor extends Entity {
 
+    enum Status {MOVING, BUFFERED, SPECIAL};
     
     private int currentX, currentY, targetX, targetY, scale, speed;
-    private Key buffer, facing;
+    private Key buffer, direction = UP;
     private Status status;
-    enum Status {IDLE, MOVING, SPECIAL};
+    
 
     public Actor(int x, int y, String tipo) {
         super(x, y, tipo);
@@ -42,9 +44,8 @@ abstract class Actor extends Entity {
     
     
     public void direcionar(Key dir, int step) {
-        return;/*
         if (getStatus() == MOVING) { setBuffer(dir); return; } 
-        switch (currDir) {
+        switch (direction) {
             case UP:
                 setTargetY(getCurrentY() - step);
                 break;
@@ -58,7 +59,7 @@ abstract class Actor extends Entity {
                 setTargetX(getCurrentX() - step);
                 break;
         }
-        setStatus(MOVING);*/
+        setStatus(MOVING);
     }
     
     /*
@@ -76,7 +77,7 @@ abstract class Actor extends Entity {
     */
     
     public void mover() {
-        //mover(currDir, 1);
+        mover(direction, 1);
         return;
     }
     

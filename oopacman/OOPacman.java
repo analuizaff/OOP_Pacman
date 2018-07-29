@@ -27,6 +27,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     //Entidades que possuem metodos render() e update();
     static ArrayList<GameObject> uiObject; //Desenhados no geral
     static ArrayList<GameObject> entityObject; //Desenhados em GameArea
+    static ArrayList<GameObject> mapObject;
     
     
     static ArrayList<String> input; //Lista de teclas pressionadas
@@ -69,7 +70,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
     private void setupObjects() {
         uiObject.add(ga);
-        entityObject.add(new Map("maps/map1.txt"));
+        mapObject.add(new Map("maps/map1.txt"));
     }
 
     private static class keyPressed implements EventHandler<KeyEvent> {

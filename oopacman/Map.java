@@ -11,7 +11,7 @@ import static oopacman.OOPacman.entityObject;
  *
  * @author Alexylva
  */
-public class Map implements EntityObject {
+public class Map implements UIObject {
 
     private StaticEntity[][] map;
     private static final int gridLines = 20, gridColumns = 15; //4:3
