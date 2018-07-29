@@ -15,7 +15,15 @@ import static oopacman.OOPacman.map;
  */
 abstract class Actor extends Entity {
 
-    enum Status {MOVING, BUFFERED, SPECIAL};
+    public Key getDirection() {
+        return direction;
+    }
+
+    public void setDirection(Key direction) {
+        this.direction = direction;
+    }
+
+    enum Status {IDLE, MOVING, BUFFERED, SPECIAL};
     
     private int currentX, currentY, targetX, targetY, scale, speed;
     private Key buffer, direction = UP;
@@ -27,6 +35,10 @@ abstract class Actor extends Entity {
     }
     
     public void mover(Key dir, int step) {
+        if(!map.dirIsFree(getGridX(),getGridY(),dir)) {
+            setStatus(IDLE);
+            return;
+        }
         switch (dir) {
             case UP:
                 setY(getY() - step);
@@ -45,21 +57,7 @@ abstract class Actor extends Entity {
     
     
     public void direcionar(Key dir, int step) {
-        if (getStatus() == MOVING) { setBuffer(dir); return; } 
-        switch (direction) {
-            case UP:
-                setTargetY(getCurrentY() - step);
-                break;
-            case DOWN:
-                setTargetY(getCurrentY() + step);
-                break;
-            case RIGHT:
-                setTargetX(getCurrentX() + step);
-                break;
-            case LEFT:
-                setTargetX(getCurrentX() - step);
-                break;
-        }
+        if (getStatus() == MOVING) { setBuffer(dir); return; }
         setStatus(MOVING);
     }
     
@@ -78,10 +76,19 @@ abstract class Actor extends Entity {
     */
     
     public void mover() {
-        if(getStatus() == MOVING){
-            mover(direction, 1);
-        } else if (getStatus() == BUFFERED) {
-            if (map.dirIsFree(buffer));
+        if(null != getStatus())switch (getStatus()) {
+            case IDLE:
+                return;
+            case MOVING:
+                mover(getDirection(), 1);
+                break;
+            case BUFFERED:
+                if (map.dirIsFree(getGridX(), getGridY(), buffer)) {
+                    setDirection(buffer);
+                };
+                break;
+            default:
+                break;
         }
         
         return;
@@ -93,11 +100,11 @@ abstract class Actor extends Entity {
     }
     
     public int getGridX() {
-        return map.snapToGrid(getX(),getY())[0];
+        return map.xyToGrid(getX(),getY())[0];
     }
     
     public int getGridY() {
-        return map.snapToGrid(getX(),getY())[1];
+        return map.xyToGrid(getX(),getY())[1];
     }
     
     public int getCurrentX() {
@@ -121,7 +128,10 @@ abstract class Actor extends Entity {
     }
 
     public void setBuffer(Key buffer) {
-        this.buffer = buffer;
+        if(direction != buffer) {
+            this.buffer = buffer;
+            setStatus(BUFFERED);
+        }
     }
 
     public Status getStatus() {

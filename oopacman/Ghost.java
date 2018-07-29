@@ -37,7 +37,7 @@ public class Ghost extends Actor {
 
     @Override
     public void update(GraphicsContext gc, double time) {
-        mover();
+        //mover();
     }
 
 }

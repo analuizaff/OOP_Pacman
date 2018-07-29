@@ -20,15 +20,15 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     static Scene pacmanScene;
     static GraphicsContext gc;
     static int width = 800;
-    static int height = 600;
-
-    static GameArea ga = new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03); //Area de jogo (sorry for the magic numbers) 3:4 aspect, x:10%, y:3%
-    static Map map = new Map("maps/map2.txt");
+    static int height = 600;  
     
     //Entidades que possuem metodos render() e update();
-    static ArrayList<GameObject> uiObject; //Desenhados no geral
-    static ArrayList<GameObject> entityObject; //Desenhados em GameArea
-    static ArrayList<GameObject> mapObject;
+    static ArrayList<GameObject> uiObject = new ArrayList<>(); //Desenhados no geral
+    static ArrayList<GameObject> entityObject = new ArrayList<>(); //Desenhados em GameArea
+    static ArrayList<GameObject> mapObject = new ArrayList<>();
+    
+    static GameArea ga = new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03); //Area de jogo (sorry for the magic numbers) 3:4 aspect, x:10%, y:3%
+    static Map map = new Map("maps/map1.txt");
     
     
     
@@ -60,9 +60,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         pacmanScene.setOnKeyPressed(new keyPressed());
         pacmanScene.setOnKeyReleased(new keyReleased());
 
-        entityObject = new ArrayList<>();
-        uiObject = new ArrayList<>();
-        mapObject = new ArrayList<>();
+        
         setupObjects(); //Adiciona os objetos a Array gameObjects;
 
         LongValue lastNanoTime = new LongValue(System.nanoTime()); //Obtem o tempo atual, classe LongValue apenas para evitar erro de contexto estatico
@@ -84,7 +82,6 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
             if (!input.contains(code)) { //Evita duplicatas
                 input.add(code);
-                System.out.println(input);
             }
         }
     }

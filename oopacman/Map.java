@@ -3,9 +3,8 @@ package oopacman;
 import javafx.scene.canvas.GraphicsContext;
 import static java.lang.Math.*;
 import java.io.*;
-import java.util.Scanner;
 import javafx.scene.paint.Color;
-import static oopacman.OOPacman.entityObject;
+import static oopacman.OOPacman.*;
 
 /**
  *
@@ -32,11 +31,11 @@ public class Map implements UIObject {
             for (int j = 0; j < gridColumns; j++) {
                 grid = gridToXY(j, i);
                 switch (mapaInt[i][j]) {
-                    case 1:
-                        this.map[i][j] = new Wall(grid[0], grid[1]);
-                        break;
                     case 0:
                         this.map[i][j] = new Path(grid[0], grid[1]);
+                        break;
+                    case 1:
+                        this.map[i][j] = new Wall(grid[0], grid[1]);
                         break;
                     case 2:
                         entityObject.add(new Pacman(grid[0], grid[1]));
@@ -64,42 +63,83 @@ public class Map implements UIObject {
             int matrizMapaInt[][] = leitor.readFile(pathToFile);
             return matrizMapaInt;
 
-        } catch (Exception e) {
+        } catch (IOException e) {
             System.out.println("Erro: " + e);
         }
         return null;
     }
 
     public int[] snapToGrid(int x, int y) {
-        return new int[]{(int) gridColumns * ((int) floor(x / gridColumns)), gridLines * ((int) floor(y / gridLines))};
+        return new int[]{(int) gridColumns * ((int) round(x / gridColumns)), gridLines * ((int) round(y / gridLines))};
     }
 
     ;
     
     
     public int[] xyToGrid(int x, int y) {
-        return new int[]{(int) floor(x * gridLines / width), (int) floor(y * gridColumns / height)};
+        return new int[]{(int) round(x * gridLines / width), (int) round(y * gridColumns / height)};
     }
 
     public int[] gridToXY(int gridX, int gridY) {
-        return new int[]{(int) floor(width * gridX / gridColumns), (int) floor(height * gridY / gridLines)};
+        return new int[]{(int) round(width * gridX / gridColumns), (int) round(height * gridY / gridLines)};
     }
-    
-    //public 
 
-    @Override
-    public void render(GraphicsContext gc, double time) {
+    public boolean dirIsFree(int x, int y, Key dir) {
+        if (x < 0 || y < 0 || x > gridLines || y > gridColumns) {
+            return false;
+        }
+        
+        try {
+        switch (dir) {
+            case UP:
+                if (map[x - 1][y].getClass().getName().equals("oopacman.Wall")) {
+                    return false;
+                };
+                break;
+            case DOWN:
+                if (map[x + 1][y].getClass().getName().equals("oopacman.Wall")) {
+                    return false;
+                };
+                break;
+            case LEFT:
+                if (map[x][y + 1].getClass().getName().equals("oopacman.Wall")) {
+                    return false;
+                };
+                break;
+            case RIGHT:
+                if (map[x][y - 1].getClass().getName().equals("oopacman.Wall")) {
+                    return false;
+                };
+                break;
+        }
+        } catch (Exception e) {
+            return false;
+        }
+        return true;
+    }
+
+        @Override
+        public void render
+        (GraphicsContext gc, double time
+        
+            ) {
         for (int i = 0; i < gridLines; i++) {
-            for (int j = 0; j < gridColumns; j++) {
-                if (map[i][j] != null) {
-                    map[i][j].render(gc, time);
+                for (int j = 0; j < gridColumns; j++) {
+                    if (map[i][j] != null) {
+                        map[i][j].render(gc, time);
+                    }
                 }
             }
         }
-    }
 
-    @Override
-    public void update(GraphicsContext gc, double time) {
+        @Override
+        public void update
+        (GraphicsContext gc, double time
+        
+        
+    
+
+) {
     }
 
 }
