@@ -30,6 +30,12 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     
     
     static ArrayList<String> input; //Lista de teclas pressionadas
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        launch(args); //Inicia a aplicação
+    }
 
     @Override
     public void start(Stage stage) {
@@ -63,17 +69,9 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
     private void setupObjects() {
         uiObject.add(ga);
+        entityObject.add(new Map("C:\\Users\\Alexylva\\Documents\\NetBeansProjects\\OOPacman\\src\\map.txt"));
         entityObject.add(new Pacman(width / 2, height / 2)); //Teste
     }
-
-    /**
-     * Realiza a logica de atualização de cada entidade
-     *
-     * @param gameobjects Array de entidades
-     * @param time Tempo atual
-     */
-
-    
 
     private static class keyPressed implements EventHandler<KeyEvent> {
 
@@ -97,11 +95,5 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
         }
     }
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String[] args) {
-        launch(args); //Inicia a aplicação
-    }
 
 }

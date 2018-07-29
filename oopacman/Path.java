@@ -3,7 +3,7 @@ package oopacman;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.paint.Color;
 
-public class Path extends StaticEntity implements GameObject {
+public class Path extends StaticEntity {
 
     private boolean capturado = false;
 
@@ -22,8 +22,8 @@ public class Path extends StaticEntity implements GameObject {
 
     @Override
     public void render(GraphicsContext gc, double time) {
-        gc.setFill(new Color(1.00, 1.00, 0.50, 1.0));//não sei colocar cor, precisa mudar a cor se capturado == true
-        gc.setStroke(new Color(0,0,0,1));
+        gc.setFill(new Color(0.00, 0.00, 0.00, 1.0));//não sei colocar cor, precisa mudar a cor se capturado == true
+        gc.setStroke(new Color(1,1,1,1));
         gc.fillRect(getX(), getY(), getSize(), getSize());
         gc.strokeRect(getX(), getY(), getSize(), getSize());
     }
