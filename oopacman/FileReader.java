@@ -27,7 +27,7 @@ public class FileReader {
         for (int i = 0; i < this.linhas; i++) {
             char[] matrizChar = matrizLinha[i].toCharArray();
 
-            for (int j = 0; j < colunas; j++) {
+            for (int j = 0; j < this.colunas; j++) {
                 matrizFinal[i][j] = Character.getNumericValue(matrizChar[j]);
             }
         }
