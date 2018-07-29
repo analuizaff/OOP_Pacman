@@ -60,6 +60,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
 
         entityObject = new ArrayList<>();
         uiObject = new ArrayList<>();
+        mapObject = new ArrayList<>();
         setupObjects(); //Adiciona os objetos a Array gameObjects;
 
         LongValue lastNanoTime = new LongValue(System.nanoTime()); //Obtem o tempo atual, classe LongValue apenas para evitar erro de contexto estatico
