@@ -27,7 +27,7 @@ public class FileReader {
         for (int i = 0; i < this.linhas; i++) {
             char[] matrizChar = matrizLinha[i].toCharArray();
 
-            for (int j = 0; j < colunas; j++) {
+            for (int j = 0; j < this.colunas; j++) {
                 matrizFinal[i][j] = Character.getNumericValue(matrizChar[j]);
             }
         }
@@ -35,5 +35,23 @@ public class FileReader {
         return matrizFinal;
     }
 
+    /*
+    public static void main( String[] args ){
+        try {
+            int a[][];
+            FileReader leitor = new FileReader(20, 15);
+            a = leitor.readFile("oopacman/MapaTeste.txt");
+            for (int i = 0; i < a.length ; i++){
+                    for (int j = 0; j < a[i].length; j++){
+                            System.out.print(a[i][j]);
+                    }
+                    System.out.println();
+            }
+        }catch (Exception e){
+            e.printStackTrace();
+        }
+    }
+
+    */
 
 }
