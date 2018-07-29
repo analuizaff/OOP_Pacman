@@ -31,6 +31,16 @@ public class Map implements EntityObject {
                     this.map[i][j] = new Wall(grid[0],grid[1]);
                 } else if (mapaInt[i][j] == 0){
                     this.map[i][j] = new Path(grid[0],grid[1]);
+                }else if (mapaInt[i][j] == 2){
+                    this.map[i][j] = new Pacman(i,j);
+                }else if (mapaInt[i][j] == 3){
+                    this.map[i][j] = new Ghost(i,j,new Color(1.00, 0, 0, 1.0) );
+                }
+                else if (mapaInt[i][j] == 4){
+                    this.map[i][j] = new Ghost(i,j,new Color(0, 1.00, 0, 1.0) );
+                }
+                else if (mapaInt[i][j] == 5){
+                    this.map[i][j] = new Ghost(i,j,new Color(0, 0, 1.00, 1.0) );
                 }
             }
         }
