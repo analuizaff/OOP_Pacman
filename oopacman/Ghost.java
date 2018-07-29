@@ -5,7 +5,7 @@ import javafx.scene.paint.Color;
 
 import static oopacman.Key.*;
 
-public class Ghost extends Actor{
+public class Ghost extends Actor {
     private Color cor;
 
     public void setCor(Color cor){
@@ -25,6 +25,7 @@ public class Ghost extends Actor{
 
     @Override
     public void render(GraphicsContext gc, double time) {
+        System.out.println("GHOSTING");
         gc.setFill(getCor());//cor do corpo do fantasma
         gc.fillRect(getX(), getY() + getSize()/2, getSize(), getSize()/2);//parte quadrada do fantasma
         gc.fillOval(getX(), getY(), getSize(), getSize()*0.95);//parte redonda

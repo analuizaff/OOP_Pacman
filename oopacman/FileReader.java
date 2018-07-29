@@ -1,6 +1,8 @@
 package oopacman;
 
+import java.io.File;
 import java.io.IOException;
+import java.nio.file.FileSystems;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
@@ -17,7 +19,8 @@ public class FileReader {
     }
 
     public int[][] readFile(String url) throws IOException {
-        Path path = Paths.get(url);
+        String filePath = new File(url).getAbsolutePath();
+        Path path = Paths.get(filePath);
 
         int[][] matrizFinal = new int[linhas][colunas];
 
