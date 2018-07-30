@@ -21,29 +21,7 @@ public class Pacman extends Actor {
         super(x, y, "Pacman");
         setSize((int) Math.floor(OOPacman.ga.getWidth() * 0.05)); //20:15
         setSpeed(10);
-    }
-
-    @Override
-    public void mover(Key dir, int step) {
-        if (!map.dirIsFree(getGridX(), getGridY(), dir)) {
-            setStatus(IDLE);
-            return;
-        }
-        switch (getDirection()) {
-            case UP:
-                setY(getY() - step);
-                break;
-            case DOWN:
-                setY(getY() + step);
-                break;
-            case RIGHT:
-                setX(getX() + step);
-                break;
-            case LEFT:
-                setX(getX() - step);
-                break;
-        }
-    }
+    }    
 
     @Override
     public void render(GraphicsContext gc, double time) {
@@ -55,7 +33,7 @@ public class Pacman extends Actor {
     String lastStatus = "";
     @Override
     public void update(GraphicsContext gc, double time) {
-        String now = String.format("%s (%d,%d) direction:%s buffer:%s\n", getStatus(), getGridX(), getGridY(), getDirection(), getBuffer());
+        String now = String.format("%s (%d,%d) => (%d,%d) direction:%s buffer:%s\n", getStatus(), getGridX(), getGridY(), getX(), getY(), getDirection(), getBuffer());
         if (!lastStatus.equals(now)) System.out.print(now);
         lastStatus = now;
         if (isPressed(UP)) {

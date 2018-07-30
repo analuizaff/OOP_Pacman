@@ -17,6 +17,7 @@ public class Map implements UIObject {
     //Real width, height
     private int width = (int) floor(OOPacman.ga.getWidth()),
             height = (int) floor(OOPacman.ga.getHeight());
+    private final int squareSize = width/gridColumns;
 
     public Map(String pathToMapFile) {
         map = new StaticEntity[gridLines][gridColumns];
@@ -38,10 +39,8 @@ public class Map implements UIObject {
                         this.map[i][j] = new Wall(grid[0], grid[1]);
                         break;
                     case 2:
-                        int[] other = xyToGrid(grid[0], grid[1]);
-                        System.out.printf("grid(%d,%d) => xy(%d,%d) => grid(%d,%d)\n", i, j, grid[0], grid[1], other[0], other[1]);
-                        
-                        entityObject.add(new Pacman(grid[0], grid[1]));
+                        int[] other = snapToGrid(grid[0], grid[1]);                        
+                        entityObject.add(new Pacman(other[0], other[1]));
                         break;
                     case 3:
                         entityObject.add(new Ghost(grid[0], grid[1], new Color(1.00, 0, 0, 1.0)));
@@ -73,7 +72,7 @@ public class Map implements UIObject {
     }
 
     public int[] snapToGrid(int x, int y) {
-        return new int[]{(int) gridColumns * ((int) floor(x / gridColumns)), gridLines * ((int) floor(y / gridLines))};
+        return new int[]{(int) gridColumns * ((int) floor(x / gridColumns)) + squareSize/2, gridLines * ((int) floor(y / gridLines)) + squareSize/2};
     }    
     
     public int[] xyToGrid(int x, int y) {
@@ -84,46 +83,45 @@ public class Map implements UIObject {
         return new int[]{(int) floor(width * gridX / gridColumns), (int) floor(height * gridY / gridLines)};
     }
 
-    public boolean dirIsFree(int x, int y, Key dir) {
+    public Wall dirIsFree(int x, int y, Key dir) {
         if (x < 0 || y < 0 || x > gridLines || y > gridColumns) {
-            return false;
+            return null;
         }
         
         try {
         switch (dir) {
             case UP:
                 if (map[x-1][y] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y-1,dir);
                     ((Wall) map[x-1][y]).setColor(new Color(1,0,0,1));
-                    return false;
+                    return (Wall) map[x-1][y];
                 };
                 break;
             case DOWN:
                 if (map[x+1][y] instanceof Wall) {
                     System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y+1], x,y+1,dir);
-                    ((Wall) map[x+1][y+1]).setColor(new Color(1,0,0,1));
-                    return false;
+                    ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
+                    return (Wall) map[x+1][y];
                 };
                 break;
             case LEFT:
                 if (map[x][y-1] instanceof Wall) {
                     System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x-1][y], x-1,y,dir);
                     ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
-                    return false;
+                    return (Wall) map[x][y-1];
                 };
                 break;
             case RIGHT:
                 if (map[x][y+1] instanceof Wall) {
                     System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x+1][y], x+1,y,dir);
-                    ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
-                    return false;
+                    ((Wall) map[x][y+1]).setColor(new Color(1,0,0,1));
+                    return (Wall) map[x][y+1];
                 };
                 break;
             }
         } catch (Exception e) {
-            return false;
+            return null;
         }
-        return true;
+        return null;
     }
 
         @Override

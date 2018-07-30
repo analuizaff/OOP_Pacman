@@ -15,57 +15,103 @@ import static oopacman.OOPacman.map;
  */
 abstract class Actor extends Entity {
 
-    enum Status {IDLE, MOVING, BUFFERED, SPECIAL};
-    
+    enum Status {
+        IDLE, MOVING, BUFFERED, SPECIAL
+    };
+
     private int currentX, currentY, targetX, targetY, scale, speed;
     private Key buffer, direction = UP;
     private Status status;
-    
 
     public Actor(int x, int y, String tipo) {
         super(x, y, tipo);
     }
-    
-    public abstract void mover(Key dir, int step);
-    
-    
-    public void direcionar(Key dir, int step) {
-        if (getStatus() == MOVING || getStatus()== IDLE) { setBuffer(dir); return; }
-        setStatus(MOVING);
-    }
-    
-    public void mover() {
-        if(null != getStatus())switch (getStatus()) {
-            case IDLE:
-                return;
-            case MOVING:
-                mover(getDirection(), 1);
+
+    public void mover(Key dir, int step) {
+        switch (getDirection()) {
+            case UP:
+                setY(getY() - step);
                 break;
-            case BUFFERED:
-                if (map.dirIsFree(getGridX(), getGridY(), buffer)) {
-                    setDirection(buffer);
-                };
+            case DOWN:
+                setY(getY() + step);
                 break;
-            default:
+            case RIGHT:
+                setX(getX() + step);
+                break;
+            case LEFT:
+                setX(getX() - step);
                 break;
         }
-        
-        return;
     }
-    
-    
+
+    public void direcionar(Key dir, int step) {
+        if (getStatus() == MOVING || getStatus() == IDLE) {
+            setBuffer(dir);
+            return;
+        }
+        setStatus(MOVING);
+    }
+
+    public void mover() {
+        if (null != getStatus()) {
+            switch (getStatus()) {
+                case IDLE:
+
+                    return;
+                case MOVING:
+                    Wall wall = map.dirIsFree(getGridX(), getGridY(), getDirection());
+                    if (wall != null) {
+                        switch (getDirection()) {
+                            case UP:
+                                if (getY() <= (wall.getY() + wall.getSize() + 1)) {
+                                    return;
+                                }
+                                break;
+                            case DOWN:
+                                if (getY() >= (wall.getY() - wall.getSize() - 1)) {
+                                    return;
+                                }
+                                break;
+                            case LEFT:
+                                if (getX() <= (wall.getX() + wall.getSize() + 1)) {
+                                    return;
+                                }
+                                break;
+                            case RIGHT:
+                                if (getX() >= (wall.getX() - wall.getSize() - 1)) {
+                                    return;
+                                }
+                                break;
+                            default:
+                                throw new AssertionError(getDirection().name());
+
+                        }
+                    }
+                    mover(getDirection(), 1);
+                    break;
+                case BUFFERED:
+                    setDirection(buffer);
+                    break;
+                default:
+                    break;
+            }
+        }
+        //} else {
+        //}
+    }
+
     public boolean intercepta(Entity entity) {
         return false; //TODO
     }
-    
+
     public int getGridX() {
-        return map.xyToGrid(getX(),getY())[0];
+        return map.xyToGrid(getX(), getY())[0];
     }
-    
+
     public int getGridY() {
-        return map.xyToGrid(getX(),getY())[1];
+        return map.xyToGrid(getX(), getY())[1];
     }
-    
+
     public int getCurrentX() {
         return currentX;
     }
@@ -81,13 +127,13 @@ abstract class Actor extends Entity {
     public void setCurrentY(int currentY) {
         this.currentY = currentY;
     }
-    
+
     public Key getBuffer() {
         return buffer;
     }
 
     public void setBuffer(Key buffer) {
-        if(getDirection() != buffer) {
+        if (getDirection() != buffer) {
             this.buffer = buffer;
             setStatus(BUFFERED);
         }
@@ -132,7 +178,7 @@ abstract class Actor extends Entity {
     public void setSpeed(int speed) {
         this.speed = speed;
     }
-    
+
     public Key getDirection() {
         return direction;
     }
