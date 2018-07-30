@@ -52,10 +52,12 @@ public class Pacman extends Actor {
         gc.fillOval(getX(), getY(), getSize(), getSize());
         gc.strokeOval(getX(), getY(), getSize(), getSize());
     }
-
+    String lastStatus = "";
     @Override
     public void update(GraphicsContext gc, double time) {
-        System.out.printf("%s (%d,%d)\n",getStatus(), getGridX(), getGridY());
+        String now = String.format("%s (%d,%d)\n", getStatus(), getGridX(), getGridY());
+        if (!lastStatus.equals(now)) System.out.print(now);
+        lastStatus = now;
         if (isPressed(UP)) {
             direcionar(UP, getSpeed());
         } else if (isPressed(DOWN)) {

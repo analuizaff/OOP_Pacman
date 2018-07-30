@@ -85,28 +85,37 @@ public class Map implements UIObject {
         if (x < 0 || y < 0 || x > gridLines || y > gridColumns) {
             return false;
         }
+        x = x+y;
+        y = x-y;
+        x = x-y;
         
         try {
         switch (dir) {
             case UP:
                 if (map[x][y-1] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y,dir);
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y-1,dir);
                     ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
                     return false;
                 };
                 break;
             case DOWN:
                 if (map[x][y+1] instanceof Wall) {
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y+1], x,y+1,dir);
+                    ((Wall) map[x][y+1]).setColor(new Color(1,0,0,1));
                     return false;
                 };
                 break;
             case LEFT:
                 if (map[x-1][y] instanceof Wall) {
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x-1][y], x-1,y,dir);
+                    ((Wall) map[x-1][y]).setColor(new Color(1,0,0,1));
                     return false;
                 };
                 break;
             case RIGHT:
                 if (map[x+1][y] instanceof Wall) {
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x+1][y], x+1,y,dir);
+                    ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
                     return false;
                 };
                 break;
