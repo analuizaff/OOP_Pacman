@@ -33,9 +33,9 @@ public class Pacman extends Actor {
     String lastStatus = "";
     @Override
     public void update(GraphicsContext gc, double time) {
-        String now = String.format("%s (%d,%d) => (%d,%d) direction:%s buffer:%s\n", getStatus(), getGridX(), getGridY(), getX(), getY(), getDirection(), getBuffer());
-        if (!lastStatus.equals(now)) System.out.print(now);
-        lastStatus = now;
+        //String now = String.format("%s (%d,%d) => (%d,%d) direction:%s buffer:%s\n", getStatus(), getGridX(), getGridY(), getX(), getY(), getDirection(), getBuffer());
+        //if (!lastStatus.equals(now)) System.out.print(now);
+        //lastStatus = now;
         if (isPressed(UP)) {
             direcionar(UP, getSpeed());
         } else if (isPressed(DOWN)) {

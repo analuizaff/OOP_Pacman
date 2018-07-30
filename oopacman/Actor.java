@@ -19,7 +19,7 @@ abstract class Actor extends Entity {
         IDLE, MOVING, BUFFERED, SPECIAL
     };
 
-    private int currentX, currentY, targetX, targetY, scale, speed;
+    private int speed;
     private Key buffer, direction = UP;
     private Status status;
 
@@ -28,7 +28,7 @@ abstract class Actor extends Entity {
     }
 
     public void mover(Key dir, int step) {
-        switch (getDirection()) {
+        switch (dir) {
             case UP:
                 setY(getY() - step);
                 break;
@@ -46,6 +46,7 @@ abstract class Actor extends Entity {
 
     public void direcionar(Key dir, int step) {
         if (getStatus() == MOVING || getStatus() == IDLE) {
+
             setBuffer(dir);
             return;
         }
@@ -53,11 +54,13 @@ abstract class Actor extends Entity {
     }
 
     public void mover() {
+        
+        //System.out.printf("(%d,%d) => (%d,%d) => (%.2f, %.2f) [%f,%f]", getX(), getY(), grid[1], grid[0], gridf[1], gridf[0], getSubX(), getSubY());
+        
         if (null != getStatus()) {
             switch (getStatus()) {
                 case IDLE:
-
-                    return;
+                    break;
                 case MOVING:
                     Wall wall = map.dirIsFree(getGridX(), getGridY(), getDirection());
                     if (wall != null) {
@@ -87,7 +90,9 @@ abstract class Actor extends Entity {
 
                         }
                     }
+                    
                     mover(getDirection(), 1);
+                    
                     break;
                 case BUFFERED:
                     setDirection(buffer);
@@ -104,28 +109,21 @@ abstract class Actor extends Entity {
         return false; //TODO
     }
 
+    public float getSubX() {
+        System.out.println(getX() % map.gridColumns);
+        return getX() % map.squareSize;
+    }
+
+    public float getSubY() {
+        return getY() % map.squareSize;
+    }
+
     public int getGridX() {
         return map.xyToGrid(getX(), getY())[0];
     }
 
     public int getGridY() {
         return map.xyToGrid(getX(), getY())[1];
-    }
-
-    public int getCurrentX() {
-        return currentX;
-    }
-
-    public void setCurrentX(int currentX) {
-        this.currentX = currentX;
-    }
-
-    public int getCurrentY() {
-        return currentY;
-    }
-
-    public void setCurrentY(int currentY) {
-        this.currentY = currentY;
     }
 
     public Key getBuffer() {
@@ -145,30 +143,6 @@ abstract class Actor extends Entity {
 
     public void setStatus(Status status) {
         this.status = status;
-    }
-
-    public int getTargetX() {
-        return targetX;
-    }
-
-    public void setTargetX(int targetX) {
-        this.targetX = targetX;
-    }
-
-    public int getTargetY() {
-        return targetY;
-    }
-
-    public void setTargetY(int targetY) {
-        this.targetY = targetY;
-    }
-
-    public int getScale() {
-        return scale;
-    }
-
-    public void setScale(int scale) {
-        this.scale = scale;
     }
 
     public int getSpeed() {

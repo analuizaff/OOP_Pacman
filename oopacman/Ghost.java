@@ -19,15 +19,10 @@ public class Ghost extends Actor {
     public Ghost(int x, int y, Color cor) {
         super(x, y, "Ghost");
         setSize((int) Math.floor(OOPacman.ga.getWidth()*0.05));
-        setSpeed(10);
+        setSpeed(20);
         setCor(cor);
     }
     
-    @Override
-    public void mover(Key dir, int step) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-
     @Override
     public void render(GraphicsContext gc, double time) {
         gc.setFill(getCor());//cor do corpo do fantasma
@@ -42,7 +37,9 @@ public class Ghost extends Actor {
 
     @Override
     public void update(GraphicsContext gc, double time) {
-        //mover();
+            direcionar(Key.getRandomDir(),getSpeed());
+            mover();
+
     }
 
 }

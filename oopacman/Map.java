@@ -13,11 +13,11 @@ import static oopacman.OOPacman.*;
 public class Map implements UIObject {
 
     private StaticEntity[][] map;
-    private static final int gridLines = 20, gridColumns = 15; //4:3
+    public static final int gridLines = 20, gridColumns = 15; //4:3
     //Real width, height
     private int width = (int) floor(OOPacman.ga.getWidth()),
             height = (int) floor(OOPacman.ga.getHeight());
-    private final int squareSize = width/gridColumns;
+    public final int squareSize = width/gridColumns;
 
     public Map(String pathToMapFile) {
         map = new StaticEntity[gridLines][gridColumns];
@@ -98,21 +98,18 @@ public class Map implements UIObject {
                 break;
             case DOWN:
                 if (map[x+1][y] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y+1], x,y+1,dir);
                     ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x+1][y];
                 };
                 break;
             case LEFT:
                 if (map[x][y-1] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x-1][y], x-1,y,dir);
                     ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x][y-1];
                 };
                 break;
             case RIGHT:
                 if (map[x][y+1] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x+1][y], x+1,y,dir);
                     ((Wall) map[x][y+1]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x][y+1];
                 };
