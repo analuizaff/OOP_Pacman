@@ -63,22 +63,22 @@ abstract class Actor extends Entity {
                     if (wall != null) {
                         switch (getDirection()) {
                             case UP:
-                                if (getY() <= (wall.getY() + wall.getSize() + 1)) {
+                                if (getY() <= (wall.getY() + wall.getSize() + 2)) {
                                     return;
                                 }
                                 break;
                             case DOWN:
-                                if (getY() >= (wall.getY() - wall.getSize() - 1)) {
+                                if (getY() >= (wall.getY() - wall.getSize() + 2)) {
                                     return;
                                 }
                                 break;
                             case LEFT:
-                                if (getX() <= (wall.getX() + wall.getSize() + 1)) {
+                                if (getX() <= (wall.getX() + wall.getSize() + 2)) {
                                     return;
                                 }
                                 break;
                             case RIGHT:
-                                if (getX() >= (wall.getX() - wall.getSize() - 1)) {
+                                if (getX() >= (wall.getX() - wall.getSize() + 2)) {
                                     return;
                                 }
                                 break;
