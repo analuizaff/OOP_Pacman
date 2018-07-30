@@ -38,6 +38,9 @@ public class Map implements UIObject {
                         this.map[i][j] = new Wall(grid[0], grid[1]);
                         break;
                     case 2:
+                        int[] other = xyToGrid(grid[0], grid[1]);
+                        System.out.printf("grid(%d,%d) => xy(%d,%d) => grid(%d,%d)\n", i, j, grid[0], grid[1], other[0], other[1]);
+                        
                         entityObject.add(new Pacman(grid[0], grid[1]));
                         break;
                     case 3:
@@ -74,7 +77,7 @@ public class Map implements UIObject {
     }    
     
     public int[] xyToGrid(int x, int y) {
-        return new int[]{(int) floor(x * gridLines / width), (int) floor(y * gridColumns / height)};
+        return new int[]{(int) floor(y * gridLines /height), (int) floor(x * gridColumns / width)};
     }
 
     public int[] gridToXY(int gridX, int gridY) {
@@ -85,35 +88,32 @@ public class Map implements UIObject {
         if (x < 0 || y < 0 || x > gridLines || y > gridColumns) {
             return false;
         }
-        x = x+y;
-        y = x-y;
-        x = x-y;
         
         try {
         switch (dir) {
             case UP:
-                if (map[x][y-1] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y-1,dir);
-                    ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
-                    return false;
-                };
-                break;
-            case DOWN:
-                if (map[x][y+1] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y+1], x,y+1,dir);
-                    ((Wall) map[x][y+1]).setColor(new Color(1,0,0,1));
-                    return false;
-                };
-                break;
-            case LEFT:
                 if (map[x-1][y] instanceof Wall) {
-                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x-1][y], x-1,y,dir);
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y-1], x,y-1,dir);
                     ((Wall) map[x-1][y]).setColor(new Color(1,0,0,1));
                     return false;
                 };
                 break;
-            case RIGHT:
+            case DOWN:
                 if (map[x+1][y] instanceof Wall) {
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x][y+1], x,y+1,dir);
+                    ((Wall) map[x+1][y+1]).setColor(new Color(1,0,0,1));
+                    return false;
+                };
+                break;
+            case LEFT:
+                if (map[x][y-1] instanceof Wall) {
+                    System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x-1][y], x-1,y,dir);
+                    ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
+                    return false;
+                };
+                break;
+            case RIGHT:
+                if (map[x][y+1] instanceof Wall) {
                     System.out.printf(("%s (%d,%d, %s) => FALSE\n"),map[x+1][y], x+1,y,dir);
                     ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
                     return false;
