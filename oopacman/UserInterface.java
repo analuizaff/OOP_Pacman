@@ -9,21 +9,20 @@ import javafx.scene.text.FontWeight;
 
 public class UserInterface implements UIObject {
 
-        private int score;
+        private static int score = 0;
         private double x, y;
         
-        public UserInterface(double x, double y, int score) {
+        public UserInterface(double x, double y) {
             this.x = x;
             this.y = y;
-            this.score = score;
         }
 
         public int getScore() {
                 return this.score;
         }
 
-        public void addScore(int score) {
-                this.score += score;
+        public static void addScore() {
+                score++;
         }
 
         @Override
