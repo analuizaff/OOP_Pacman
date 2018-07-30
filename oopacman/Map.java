@@ -26,6 +26,10 @@ public class Map implements UIObject {
 
     }
 
+    public StaticEntity getStaticEntity(int x, int y){
+            return this.map[x][y];
+    }
+
     private void criarMapa(int[][] mapaInt) {
         int[] grid;
         for (int i = 0; i < gridLines; i++) {
@@ -100,7 +104,7 @@ public class Map implements UIObject {
                 if (map[x+1][y] instanceof Wall) {
                     ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x+1][y];
-                };
+                }
                 break;
             case LEFT:
                 if (map[x][y-1] instanceof Wall) {

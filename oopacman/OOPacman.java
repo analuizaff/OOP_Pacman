@@ -29,7 +29,7 @@ public class OOPacman extends Application { // Stage -> Scene -> Nodes
     
     static GameArea ga = new GameArea(width * 0.533, height * 0.947, width * 0.1, height * 0.03); //Area de jogo (sorry for the magic numbers) 3:4 aspect, x:10%, y:3%
     static Map map = new Map("maps/map1.txt");
-    static UserInterface ui = new UserInterface(width * 0.65,height*0.03,0);
+    static UserInterface ui = new UserInterface(width * 0.65,height*0.03);
     
     
     

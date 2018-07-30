@@ -48,7 +48,7 @@ public class Pacman extends Actor {
         mover();
         if (map.getStaticEntity(this.getGridX(),this.getGridY()) instanceof Path && !(((Path) map.getStaticEntity(this.getGridX(), getGridY())).getCapturado())){
                 ((Path) map.getStaticEntity(this.getGridX(), getGridY())).capturar();
-                UserInterface.addScore();
+                UserInterface.addScore(100);
         }
     }
 

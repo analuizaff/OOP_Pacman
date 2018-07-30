@@ -22,7 +22,10 @@ public class Path extends StaticEntity {
 
     @Override
     public void render(GraphicsContext gc, double time) {
-        gc.setFill(new Color(0.00, 0.00, 0.00, 1.0));//não sei colocar cor, precisa mudar a cor se capturado == true
+        Color fill;
+        if (capturado) { fill = new Color(0,0,0,1); }
+        else { fill = new Color(0.16,0.16,0.38,1); }
+        gc.setFill(fill);//não sei colocar cor, precisa mudar a cor se capturado == true
         gc.setStroke(new Color(1,1,1,1));
         gc.fillRect(getX(), getY(), getSize(), getSize());
         gc.strokeRect(getX(), getY(), getSize(), getSize());
