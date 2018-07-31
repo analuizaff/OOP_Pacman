@@ -46,71 +46,64 @@ abstract class Actor extends Entity {
 
     public void direcionar(Key dir, int step) {
         if (getStatus() == MOVING || getStatus() == IDLE) {
-
             setBuffer(dir);
             return;
         }
-        setStatus(MOVING);
     }
 
     public void mover() {
-        
         //System.out.printf("(%d,%d) => (%d,%d) => (%.2f, %.2f) [%f,%f]", getX(), getY(), grid[1], grid[0], gridf[1], gridf[0], getSubX(), getSubY());
-        
+        Wall wall;
         if (null != getStatus()) {
             switch (getStatus()) {
                 case IDLE:
                     break;
+                case BUFFERED:
+                    if (canTurn()) {
+                        setDirection(getBuffer());
+                        setStatus(MOVING);
+                    }
                 case MOVING:
-                    Wall wall = map.dirIsFree(getGridX(), getGridY(), getDirection());
+                    wall = map.dirIsFree(getGridX(), getGridY(), getDirection());
                     if (wall != null) {
                         switch (getDirection()) {
                             case UP:
                                 if (getY() <= (wall.getY() + wall.getSize() + 2)) {
+                                    setStatus(IDLE);
                                     return;
                                 }
                                 break;
                             case DOWN:
                                 if (getY() >= (wall.getY() - wall.getSize() + 2)) {
+                                    setStatus(IDLE);
                                     return;
                                 }
                                 break;
                             case LEFT:
                                 if (getX() <= (wall.getX() + wall.getSize() + 2)) {
+                                    setStatus(IDLE);
                                     return;
                                 }
                                 break;
                             case RIGHT:
                                 if (getX() >= (wall.getX() - wall.getSize() + 2)) {
+                                    setStatus(IDLE);
                                     return;
                                 }
                                 break;
-                            default:
-                                throw new AssertionError(getDirection().name());
-
                         }
                     }
-                    
                     mover(getDirection(), 1);
-                    
-                    break;
-                case BUFFERED:
-                    setDirection(buffer);
-                    break;
-                default:
                     break;
             }
         }
-        //} else {
-        //}
     }
-
-    public boolean intercepta(Entity entity) {
-        return false; //TODO
+    
+    public boolean canTurn() {
+        return (getSubX()+getSize()-5 <= map.squareSize && getSubY()+getSize()-5 <= map.squareSize);
     }
 
     public float getSubX() {
-        System.out.println(getX() % map.gridColumns);
         return getX() % map.squareSize;
     }
 
@@ -127,6 +120,7 @@ abstract class Actor extends Entity {
     }
 
     public Key getBuffer() {
+        if (this.buffer == null) return RIGHT;
         return buffer;
     }
 
@@ -138,6 +132,7 @@ abstract class Actor extends Entity {
     }
 
     public Status getStatus() {
+        if (status == null) setStatus(IDLE);
         return status;
     }
 

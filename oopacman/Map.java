@@ -96,25 +96,21 @@ public class Map implements UIObject {
         switch (dir) {
             case UP:
                 if (map[x-1][y] instanceof Wall) {
-                    ((Wall) map[x-1][y]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x-1][y];
                 };
                 break;
             case DOWN:
                 if (map[x+1][y] instanceof Wall) {
-                    ((Wall) map[x+1][y]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x+1][y];
                 }
                 break;
             case LEFT:
                 if (map[x][y-1] instanceof Wall) {
-                    ((Wall) map[x][y-1]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x][y-1];
                 };
                 break;
             case RIGHT:
                 if (map[x][y+1] instanceof Wall) {
-                    ((Wall) map[x][y+1]).setColor(new Color(1,0,0,1));
                     return (Wall) map[x][y+1];
                 };
                 break;
