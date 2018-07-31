@@ -16,7 +16,7 @@ import static oopacman.OOPacman.*;
  */
 public class Draw extends AnimationTimer {
 
-    private long frameCount = 0;
+    public static long frameCount = 0;
     private LongValue lastNanoTime;
 
     public Draw(LongValue lastNanoTime) {

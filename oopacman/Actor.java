@@ -93,14 +93,14 @@ abstract class Actor extends Entity {
                                 break;
                         }
                     }
-                    mover(getDirection(), 1);
+                    mover(getDirection(), getSpeed());
                     break;
             }
         }
     }
     
     public boolean canTurn() {
-        return (getSubX()+getSize()-5 <= map.squareSize && getSubY()+getSize()-5 <= map.squareSize);
+        return (getSubX()+getSize()-6 <= map.squareSize && getSubY()+getSize()-6 <= map.squareSize);
     }
 
     public float getSubX() {
@@ -141,7 +141,7 @@ abstract class Actor extends Entity {
     }
 
     public int getSpeed() {
-        return speed;
+        return speed/10;
     }
 
     public void setSpeed(int speed) {
