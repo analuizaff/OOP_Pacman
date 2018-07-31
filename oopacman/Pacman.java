@@ -49,6 +49,10 @@ public class Pacman extends Actor {
         if (map.getStaticEntity(this.getGridX(),this.getGridY()) instanceof Path && !(((Path) map.getStaticEntity(this.getGridX(), getGridY())).getCapturado())){
                 ((Path) map.getStaticEntity(this.getGridX(), getGridY())).capturar();
                 UserInterface.addScore(100);
+                
+                if UserInterface.getScore() == map.getPontosTotais{
+                    Draw.setMode(Mode.WIN);
+                }
         }
     }
 
